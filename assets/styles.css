@@ -65,7 +65,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 
 .result-label{color:var(--muted);font-size:12px;font-weight:750;text-transform:uppercase;letter-spacing:.06em}
 .result-value{margin-top:4px;font-size:clamp(28px,5vw,44px);font-weight:900;letter-spacing:-.04em;overflow-wrap:anywhere}
 .result-detail{margin-top:7px;color:var(--muted);font-size:14px}
-.info{margin-top:28px;padding:24px 2px 0;max-width:760px;color:var(--muted)}
+.info{margin-bottom:28px;padding:24px 2px 0;max-width:760px;color:var(--muted)}
 .info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:none}
 .info-card{padding:20px;border:1px solid #eef3f1;border-radius:18px;background:#fff;box-shadow:0 8px 22px rgba(0,0,0,.04)}
 .info-card h2{margin:0 0 8px;color:var(--ink);font-size:18px;letter-spacing:-.02em}
