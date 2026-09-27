@@ -16,22 +16,24 @@ function initPercentage(){
   $("#changeBtn").onclick=()=>{const old=num("#oldValue"),now=num("#newValue");$("#changeResult").textContent=Number.isFinite(old)&&Number.isFinite(now)&&old!==0?fmt((now-old)/Math.abs(old)*100)+"%":"Enter valid numbers"};
 }
 function dateFromInput(id){const v=$(id).value;if(!v)return null;const [y,m,d]=v.split("-").map(Number);return new Date(y,m-1,d)}
+function localISO(date=new Date()){const y=date.getFullYear(),m=String(date.getMonth()+1).padStart(2,"0"),d=String(date.getDate()).padStart(2,"0");return `${y}-${m}-${d}`}
+function addMonthsClamped(date,months){const total=date.getFullYear()*12+date.getMonth()+months,y=Math.floor(total/12),m=((total%12)+12)%12,day=Math.min(date.getDate(),new Date(y,m+1,0).getDate());return new Date(y,m,day)}
 function exactAge(start,end){
   if(end<start)return null;
-  let y=end.getFullYear()-start.getFullYear(),m=end.getMonth()-start.getMonth(),d=end.getDate()-start.getDate();
-  if(d<0){m--;const prev=new Date(end.getFullYear(),end.getMonth(),0);d+=prev.getDate()}
-  if(m<0){y--;m+=12}
-  return {y,m,d,total:daysBetween(start,end)};
+  let totalMonths=(end.getFullYear()-start.getFullYear())*12+(end.getMonth()-start.getMonth());
+  let anchor=addMonthsClamped(start,totalMonths);
+  if(anchor>end){totalMonths--;anchor=addMonthsClamped(start,totalMonths)}
+  return {y:Math.floor(totalMonths/12),m:totalMonths%12,d:daysBetween(anchor,end),total:daysBetween(start,end)};
 }
 function initAge(){
-  const today=new Date(),iso=today.toISOString().slice(0,10);$("#ageOn").value=iso;
+  $("#ageOn").value=localISO();
   $("#ageBtn").onclick=()=>{const dob=dateFromInput("#dob"),on=dateFromInput("#ageOn"),out=$("#ageResult"),detail=$("#ageDetail");if(!dob||!on){out.textContent="Choose both dates";detail.textContent="";return}const a=exactAge(dob,on);if(!a){out.textContent="Target date must be after birth date";detail.textContent="";return}out.textContent=`${a.y} years, ${a.m} months, ${a.d} days`;detail.textContent=`${fmt(a.total)} days total`;};
 }
 function initDiscount(){
   $("#discountBtn").onclick=()=>{const price=num("#price"),discount=num("#discount"),out=$("#discountResult"),detail=$("#discountDetail");if(!Number.isFinite(price)||!Number.isFinite(discount)||price<0){out.textContent="Enter valid values";detail.textContent="";return}const save=price*discount/100,final=price-save;out.textContent=fmt(final);detail.textContent=`You save ${fmt(save)} · ${fmt(discount)}% off`;};
 }
 function initDate(){
-  const today=new Date().toISOString().slice(0,10);$("#baseDate").value=today;$("#dateA").value=today;$("#dateB").value=today;
+  const today=localISO();$("#baseDate").value=today;$("#dateA").value=today;$("#dateB").value=today;
   $("#offsetBtn").onclick=()=>{const base=dateFromInput("#baseDate"),amount=Math.trunc(num("#dayOffset"));if(!base||!Number.isFinite(amount)){ $("#offsetResult").textContent="Enter a valid date and number";return}base.setDate(base.getDate()+amount);$("#offsetResult").textContent=base.toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric",weekday:"long"});};
   $("#differenceBtn").onclick=()=>{const a=dateFromInput("#dateA"),b=dateFromInput("#dateB");$("#differenceResult").textContent=a&&b?fmt(Math.abs(daysBetween(a,b)))+" days":"Choose both dates";};
 }
