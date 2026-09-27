@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ji-minseo.github.io/calculate-everything/sitemap.xml
+Sitemap: https://calculate.everytinytool.com/sitemap.xml
