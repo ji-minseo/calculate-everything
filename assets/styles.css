@@ -39,7 +39,7 @@ h1{margin:18px 0 14px;font-size:clamp(42px,8vw,78px);line-height:.97;letter-spac
 .tool-card:nth-child(4) .icon{background:#FFF3BF}
 .tool-card:nth-child(5) .icon{background:#E8E1FF}
 .tool-card:nth-child(6) .icon{background:#F8E0EC}
-.tool-card:nth-child(7) .icon{background:#FBE4F0}
+.tool-card:nth-child(7) .icon{background:#DFF2D8}
 .tool-card:nth-child(8) .icon{background:#F3DFF6}
 .tool-card h2{margin:0 0 6px;font-size:22px;letter-spacing:-.035em}
 .tool-card p{margin:0;color:var(--muted);font-size:14px}
