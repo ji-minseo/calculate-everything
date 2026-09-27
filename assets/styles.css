@@ -53,7 +53,9 @@ h1{margin:18px 0 14px;font-size:clamp(42px,8vw,78px);line-height:.97;letter-spac
 .calc-block+.calc-block{margin-top:28px;padding-top:28px;border-top:1px solid #eef1f0}
 .calc-block h2{margin:0 0 14px;font-size:20px;letter-spacing:-.025em}
 label{display:block;margin-bottom:8px;font-size:13px;font-weight:750}
-input,textarea,select{width:100%;border:1px solid #e4ebe8;background:#fff;color:var(--ink);border-radius:14px;padding:13px 14px;outline:none}
+input,textarea,select{width:100%;min-width:0;max-width:100%;border:1px solid #e4ebe8;background:#fff;color:var(--ink);border-radius:14px;padding:13px 14px;outline:none}
+input[type="date"],input[type="time"]{display:block;width:100%;min-width:0;max-width:100%}
+.row>*{min-width:0}
 textarea{resize:vertical;min-height:140px}
 input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
