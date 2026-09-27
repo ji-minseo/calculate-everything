@@ -40,6 +40,80 @@ function initDate(){
 function initAverage(){
   $("#averageBtn").onclick=()=>{const values=$("#numbers").value.split(/[\s,]+/).filter(Boolean).map(Number).filter(Number.isFinite),out=$("#averageResult"),detail=$("#averageDetail");if(!values.length){out.textContent="Add at least one number";detail.textContent="";return}const sorted=[...values].sort((a,b)=>a-b),sum=values.reduce((a,b)=>a+b,0),mid=Math.floor(sorted.length/2),median=sorted.length%2?sorted[mid]:(sorted[mid-1]+sorted[mid])/2;out.textContent=fmt(sum/values.length);detail.textContent=`Count ${values.length} · Sum ${fmt(sum)} · Median ${fmt(median)} · Min ${fmt(sorted[0])} · Max ${fmt(sorted.at(-1))}`;};
 }
+function initTip(){
+  $("#tipBtn").onclick=()=>{
+    const bill=num("#billAmount"),tip=num("#tipPercent"),people=Math.trunc(num("#peopleCount"));
+    const out=$("#tipResult"),detail=$("#tipDetail");
+    if(!Number.isFinite(bill)||!Number.isFinite(tip)||!Number.isFinite(people)||bill<0||tip<0||people<1){
+      out.textContent="Enter valid values";detail.textContent="";return;
+    }
+    const tipAmount=bill*tip/100,total=bill+tipAmount,perPerson=total/people;
+    out.textContent=fmt(perPerson);
+    detail.textContent=`Total ${fmt(total)} · Tip ${fmt(tipAmount)} · ${people} ${people===1?"person":"people"}`;
+  };
+}
+function timeToMinutes(value){
+  if(!value||!/^[0-2]\d:[0-5]\d$/.test(value))return null;
+  const [h,m]=value.split(":").map(Number);
+  if(h>23)return null;
+  return h*60+m;
+}
+function formatDuration(total){
+  const h=Math.floor(total/60),m=total%60;
+  return `${h} hr ${m} min`;
+}
+function formatClock(total){
+  const dayShift=Math.floor(total/1440);
+  const normalized=((total%1440)+1440)%1440;
+  const h=String(Math.floor(normalized/60)).padStart(2,"0");
+  const m=String(normalized%60).padStart(2,"0");
+  return {time:`${h}:${m}`,dayShift};
+}
+function initTime(){
+  $("#durationBtn").onclick=()=>{
+    const start=timeToMinutes($("#startTime").value),end=timeToMinutes($("#endTime").value);
+    const out=$("#durationResult"),detail=$("#durationDetail");
+    if(start===null||end===null){out.textContent="Choose both times";detail.textContent="";return;}
+    let duration=end-start,overnight=false;
+    if(duration<0){duration+=1440;overnight=true;}
+    out.textContent=formatDuration(duration);
+    detail.textContent=`${fmt(duration)} minutes total${overnight?" · crosses midnight":""}`;
+  };
+  $("#addTimeBtn").onclick=()=>{
+    const start=timeToMinutes($("#addStartTime").value),hours=Math.trunc(num("#addHours")),minutes=Math.trunc(num("#addMinutes"));
+    const out=$("#addTimeResult"),detail=$("#addTimeDetail");
+    if(start===null||!Number.isFinite(hours)||!Number.isFinite(minutes)){out.textContent="Enter a valid time and duration";detail.textContent="";return;}
+    const added=hours*60+minutes,result=formatClock(start+added);
+    out.textContent=result.time;
+    detail.textContent=result.dayShift===0?"Same day":result.dayShift>0?`+${result.dayShift} day${result.dayShift===1?"":"s"}`:`${result.dayShift} day${result.dayShift===-1?"":"s"}`;
+  };
+}
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b]}return a||1}
+function simplifiedRatio(aRaw,bRaw){
+  const a=Number(aRaw),b=Number(bRaw);
+  if(!Number.isFinite(a)||!Number.isFinite(b)||a<=0||b<=0)return null;
+  const decimals=s=>{const p=String(s).split(".")[1];return p?Math.min(p.length,6):0};
+  const scale=10**Math.max(decimals(aRaw),decimals(bRaw));
+  let ai=Math.round(a*scale),bi=Math.round(b*scale);
+  const d=gcd(ai,bi);ai/=d;bi/=d;
+  return [ai,bi];
+}
+function initRatio(){
+  $("#simplifyRatioBtn").onclick=()=>{
+    const r=simplifiedRatio($("#ratioA").value,$("#ratioB").value);
+    $("#ratioResult").textContent=r?`${r[0]} : ${r[1]}`:"Enter two positive numbers";
+  };
+  $("#splitRatioBtn").onclick=()=>{
+    const a=num("#splitA"),b=num("#splitB"),total=num("#splitTotal");
+    const out=$("#splitRatioResult"),detail=$("#splitRatioDetail");
+    if(!Number.isFinite(a)||!Number.isFinite(b)||!Number.isFinite(total)||a<=0||b<=0){
+      out.textContent="Enter valid positive values";detail.textContent="";return;
+    }
+    const first=total*a/(a+b),second=total*b/(a+b);
+    out.textContent=`${fmt(first)} : ${fmt(second)}`;
+    detail.textContent=`Splits ${fmt(total)} in a ${fmt(a)}:${fmt(b)} ratio`;
+  };
+}
 addBottomToolTabs();
 const tool=document.body.dataset.tool;
 if(tool==="percentage")initPercentage();
@@ -47,3 +121,6 @@ if(tool==="age")initAge();
 if(tool==="discount")initDiscount();
 if(tool==="date")initDate();
 if(tool==="average")initAverage();
+if(tool==="tip")initTip();
+if(tool==="time")initTime();
+if(tool==="ratio")initRatio();
