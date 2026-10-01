@@ -111,3 +111,26 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 
   .tool-layout{padding-top:28px}
   .row,.row.three,.info-grid,.network-grid{grid-template-columns:1fr}
 }
+
+/* Calculator modes, formulas and detailed results */
+.mode-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.mode-tabs button{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;color:var(--ink);font-weight:700;font-size:14px}
+.mode-tabs button[aria-selected="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-strong)}
+[hidden]{display:none!important}
+.panel .calc-block[role="tabpanel"]{margin:0;padding:0;border:0}
+.check{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:14px;font-weight:600}
+.check input{width:18px;height:18px;flex:0 0 18px;padding:0;accent-color:var(--accent)}
+.input-note{font-size:14px;color:var(--muted);margin:12px 0}
+.input-note a{text-decoration:underline;color:var(--accent-strong)}
+.formula:empty{display:none}
+.formula{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);color:#425c51;font-size:14px;overflow-wrap:anywhere;white-space:pre-line}
+.result-detail{white-space:pre-line}
+.result-detail dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 16px;margin:12px 0 0}
+.result-detail dt{font-weight:600;color:var(--muted)}
+.result-detail dd{margin:0;color:var(--ink);text-align:right;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+label{font-size:14px}
+button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.tool-head h1{line-height:1.13;letter-spacing:-.035em}
+.row+.row,.row+div>label{margin-top:16px}
+@media(max-width:400px){.result-detail dl{grid-template-columns:1fr;gap:3px}.result-detail dd{text-align:left;margin-bottom:8px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}::view-transition-group(*){animation:none!important}}
