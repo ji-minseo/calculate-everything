@@ -135,4 +135,23 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
 @media(max-width:400px){.result-detail dl{grid-template-columns:1fr;gap:3px}.result-detail dd{text-align:left;margin-bottom:8px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}::view-transition-group(*){animation:none!important}}
 
-.language-switch{font-size:14px;font-weight:700;color:var(--accent-strong);border:1px solid var(--line);padding:7px 12px;border-radius:10px;margin-left:12px;white-space:nowrap}.topbar .toplink{margin-left:auto}
+
+
+/* Home explanation and FAQ: shared structure with Random Everything. */
+.home-explainer,.home-faq{padding:32px 0 54px;border-top:1px solid var(--line)}
+.section-heading{max-width:720px;margin-bottom:20px}
+.section-kicker{display:inline-block;margin-bottom:7px;color:var(--accent-strong);font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.07em}
+.section-heading h2{margin:0;font-size:clamp(28px,4vw,40px);line-height:1.05;letter-spacing:-.045em}
+.section-heading p{margin:9px 0 0;color:var(--muted);font-size:15px}
+.home-info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.home-info-grid article{padding:20px;border:1px solid #f0f0f0;border-radius:18px;background:#fff;box-shadow:0 8px 22px rgba(0,0,0,.035)}
+.home-info-grid h3{margin:0 0 8px;font-size:18px;letter-spacing:-.025em}
+.home-info-grid p{margin:0;color:var(--muted);font-size:14px}
+.faq-list{display:grid;gap:8px}
+.faq-list details{border:1px solid #eeeeee;border-radius:14px;padding:0 15px;background:#fafafa}
+.faq-list summary{cursor:pointer;padding:13px 0;font-weight:800}
+.faq-list p{margin:0;padding:0 0 14px;color:var(--muted)}
+
+
+
+.section-kicker{font-size:14px}.section-heading p,.home-info-grid p,.faq-list p{font-size:16px}.section-heading h2{line-height:1.2}.home-tool-links{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:14px;font-size:14px;font-weight:700}.home-tool-links a{color:var(--accent-strong);text-decoration:underline;text-underline-offset:3px}.faq-list summary{line-height:1.5;font-size:16px}.faq-list summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.faq-list details[open]{background:var(--accent-soft);border-color:var(--line)}@media(max-width:720px){.home-info-grid{grid-template-columns:1fr}.home-explainer,.home-faq{padding:26px 0 38px}}
