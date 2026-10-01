@@ -154,4 +154,5 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
 
 
 
-.section-kicker{font-size:14px}.section-heading p,.home-info-grid p,.faq-list p{font-size:16px}.section-heading h2{line-height:1.2}.home-tool-links{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:14px;font-size:14px;font-weight:700}.home-tool-links a{color:var(--accent-strong);text-decoration:underline;text-underline-offset:3px}.faq-list summary{line-height:1.5;font-size:16px}.faq-list summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.faq-list details[open]{background:var(--accent-soft);border-color:var(--line)}@media(max-width:720px){.home-info-grid{grid-template-columns:1fr}.home-explainer,.home-faq{padding:26px 0 38px}}
+.faq-list summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media(max-width:720px){.home-info-grid{grid-template-columns:1fr}}
