@@ -134,3 +134,5 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
 .row+.row,.row+div>label{margin-top:16px}
 @media(max-width:400px){.result-detail dl{grid-template-columns:1fr;gap:3px}.result-detail dd{text-align:left;margin-bottom:8px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}::view-transition-group(*){animation:none!important}}
+
+.language-switch{font-size:14px;font-weight:700;color:var(--accent-strong);border:1px solid var(--line);padding:7px 12px;border-radius:10px;margin-left:12px;white-space:nowrap}.topbar .toplink{margin-left:auto}
