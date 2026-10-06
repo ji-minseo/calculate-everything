@@ -49,3 +49,15 @@ function initVAT(){action('vatBtn','vatResult',()=>{const amount=num('#vatAmount
 if(typeof document!=='undefined'){addBottomToolTabs();initModes();const init={age:initAge,date:initDate,time:initTime,discount:initDiscount,percentage:initPercentage,average:initAverage,ratio:initRatio,tip:initTip,vat:initVAT}[document.body.dataset.tool];if(init)init();}
 if(typeof module!=='undefined')module.exports={parseDate,daysBetween,addDays,exactAge,ageDetails,businessDays,discountDetails,stats,timeToMinutes,workDuration,formatClock,simplifiedRatio,solveProportion,splitBill,vatDetails,percentageChange};
 
+
+
+function addSiteTrustLinks() {
+  const footer = document.querySelector(".footer");
+  if (!footer || footer.querySelector(".footer-trust-links")) return;
+  const nav = document.createElement("nav");
+  nav.className = "footer-trust-links";
+  nav.setAttribute("aria-label", "Site information");
+  nav.innerHTML = '<a href="https://everytinytool.com/">Every Tiny Tool</a><a href="https://everytinytool.com/about/">About</a><a href="https://everytinytool.com/privacy/">Privacy</a><a href="https://everytinytool.com/contact/">Contact</a>';
+  footer.appendChild(nav);
+}
+addSiteTrustLinks();
