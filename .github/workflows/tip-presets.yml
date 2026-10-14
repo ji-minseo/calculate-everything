@@ -1,0 +1,34 @@
+name: Tip calculator preset regression
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/tools.js'
+      - 'assets/styles.css'
+      - 'tip-calculator/index.html'
+      - 'tests/tip-presets.test.js'
+      - '.github/workflows/tip-presets.yml'
+  pull_request:
+    paths:
+      - 'assets/tools.js'
+      - 'assets/styles.css'
+      - 'tip-calculator/index.html'
+      - 'tests/tip-presets.test.js'
+      - '.github/workflows/tip-presets.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  tip-presets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate calculator JavaScript
+        run: node --check assets/tools.js
+      - name: Verify tip percent presets and calculations
+        run: node --test tests/tip-presets.test.js
