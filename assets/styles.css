@@ -114,8 +114,8 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 
 
 /* Calculator modes, formulas and detailed results */
 .mode-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
-.mode-tabs button{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;color:var(--ink);font-weight:700;font-size:14px}
-.mode-tabs button[aria-selected="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-strong)}
+.mode-tabs button,.tip-presets button{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;color:var(--ink);font-weight:700;font-size:14px}
+.mode-tabs button[aria-selected="true"],.tip-presets button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-strong)}
 [hidden]{display:none!important}
 .panel .calc-block[role="tabpanel"]{margin:0;padding:0;border:0}
 .check{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:14px;font-weight:600}
@@ -171,19 +171,16 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
 /* AdSense review readiness: hide unfinished ad placeholders until real ad units are installed. */
 .ad-slot{display:none!important}
 
-/* Useful one-tap tip amounts, aligned with shared calculator presets. */
-.tip-presets{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:13px 0 2px}
-.tip-presets>span{font-size:12px;font-weight:760;color:var(--muted);margin-right:4px}
-.tip-presets .preset-btn{min-width:47px;min-height:37px;padding:8px 11px;font-size:13px;border-radius:11px}
-.tip-presets .preset-btn.active,.tip-presets .preset-btn[aria-pressed="true"]{
-  background:var(--accent-soft);border-color:var(--accent-strong);color:var(--accent-strong)
-}
-.tip-presets .preset-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+/* Tip quick-select reuses the same button design as calculator mode tabs. */
+.tip-presets{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:15px 0 4px}
+.tip-presets>span{color:var(--muted);font-size:13px;font-weight:750;margin-right:3px}
+.tip-presets button{min-height:41px;cursor:pointer}
+.tip-presets button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .info-card[aria-label="Related calculators"] a,
 .info-card[aria-labelledby="ratio-examples-title"] a{
   text-decoration:underline;text-underline-offset:3px;color:var(--accent-strong)
 }
 @media(max-width:420px){
   .tip-presets{gap:6px}
-  .tip-presets .preset-btn{min-width:43px;padding:8px}
+  .tip-presets button{padding:9px 11px;font-size:13px}
 }
