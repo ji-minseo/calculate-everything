@@ -57,7 +57,7 @@ function createPage() {
     },
     createElement() { return makeElement(); }
   };
-  vm.runInNewContext(source, { document, module: { exports: {} }, console });
+  vm.runInNewContext(source, { document, module: { exports: {} } });
   return { elements, presets };
 }
 
